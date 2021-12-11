@@ -1,5 +1,6 @@
 import { getSubmarineLocation, getSubmarineLocationWithAim, mapMovementStringsToMovements, Movement } from "./getSubmarineLocation.ts";
 import { resolve } from "https://deno.land/std@0.117.0/path/mod.ts";
+import { Result } from "../main.ts";
 
 const dayTwoFilePath = resolve("day2","input", "movements.txt");
 
@@ -17,7 +18,7 @@ function getExerciseTwoResults(movements: Movement[]) {
     return horizontal * depth
 }
 
-export async function getDayTwoResults() {
+export async function getDayTwoResults(): Promise<Result>  {
     const dayTwoValues = await getDayTwoFileValues()
     const movements = mapMovementStringsToMovements(dayTwoValues)
     const exerciseOne = getExerciseOneResults(movements)

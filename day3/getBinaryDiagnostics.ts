@@ -55,3 +55,29 @@ export function getEpsilonRate(bitDiagnostics: string[]): number {
 export function getPowerRate(bitDiagnostics: string[]): number {
     return getGammaRate(bitDiagnostics) * getEpsilonRate(bitDiagnostics)
 }
+
+export function getOxygenRate(bitDiagnostics: string[], index = 0): number {
+   const bitArray = transformDiagnosticsToBitArray(bitDiagnostics, index)
+   const mostFrequentValue = getMostFrequentBit(bitArray)
+   const result = bitDiagnostics.filter(bit => parseInt(bit[index]) === mostFrequentValue)
+
+   if(result.length > 1) {
+    return getOxygenRate(result, index + 1)
+   }
+   return parseInt(result[0], 2)
+}
+
+export function getCarbonDioxideRate(bitDiagnostics: string[], index = 0): number {
+    const bitArray = transformDiagnosticsToBitArray(bitDiagnostics, index)
+    const mostFrequentValue = getLeastFrequentBit(bitArray)
+    const result = bitDiagnostics.filter(bit => parseInt(bit[index]) === mostFrequentValue)
+ 
+    if(result.length > 1) {
+     return getCarbonDioxideRate(result, index + 1)
+    }
+    return parseInt(result[0], 2)
+ }
+
+ export function getLiveSupportRate(bitDiagnostics: string[]): number {
+     return getOxygenRate(bitDiagnostics) * getCarbonDioxideRate(bitDiagnostics)
+ }
