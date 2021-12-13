@@ -1,6 +1,7 @@
 import { getDayOneResults } from './day1/day1.ts'
 import { getDayTwoResults } from './day2/day2.ts'
 import { getDayThreeResults } from "./day3/day3.ts";
+import { getDayFourResults } from "./day4/day4.ts";
 
 
 export interface Result {
@@ -20,6 +21,8 @@ async function getDayResults() {
             return printResults(await getDayTwoResults())
         case "3":
             return printResults(await getDayThreeResults())
+        case "4":
+            return printResults(await getDayFourResults())
         default:
             return console.log("We don't know the question, but 42 is the answer")
     }
