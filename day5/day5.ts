@@ -29,7 +29,8 @@ async function getCoordinatesFromFile(): Promise<Coordinate[]> {
 export async function getDayFiveResults(): Promise<Result> {
     const coordinates = await getCoordinatesFromFile()
     const exerciseOne = getOverlappingCoordinatesCount(coordinates)
+    const exerciseTwo = getOverlappingCoordinatesCount(coordinates, true)
 
-    return {exerciseOne}
+    return {exerciseOne, exerciseTwo}
 }
 
