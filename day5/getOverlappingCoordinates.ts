@@ -9,8 +9,8 @@ export interface Coordinate {
     to: number[];
 }
 
-function getOverlappingCoordinates(coordinates:Coordinate[]): MappedCoordinate[] {
-    const coordinatesCount: MappedCoordinate[] = []
+function getOverlappingCoordinates(coordinates:Coordinate[]): Map<string,number> {
+    const coordinatesCount = new Map<string, number>()
 
     for (const coordinate of coordinates) {
         const [fromX, fromY] = coordinate.from
@@ -25,15 +25,11 @@ function getOverlappingCoordinates(coordinates:Coordinate[]): MappedCoordinate[]
             const lowestX = fromX < toX ? fromX : toX
             const highestX = fromX > toX ? fromX : toX
             for (let x = lowestX; x <= highestX; x++) {
-                const existingCoordinate = coordinatesCount.find(coordinate => coordinate.x === x && coordinate.y === fromY)
+                const existingCoordinate = coordinatesCount.has(`${x},${fromY}`)
                 if(existingCoordinate) {
-                    existingCoordinate.count = existingCoordinate.count + 1
+                    coordinatesCount.set(`${x},${fromY}`, coordinatesCount.get(`${x},${fromY}`)! + 1)
                 } else {
-                    coordinatesCount.push({
-                        x,
-                        y: fromY,
-                        count: 1 
-                    })  
+                    coordinatesCount.set(`${x},${fromY}`, 1)  
                 }
             }
         } else if(isVerticalLine) {
@@ -41,22 +37,25 @@ function getOverlappingCoordinates(coordinates:Coordinate[]): MappedCoordinate[]
             const highestY = fromY > toY ? fromY : toY
 
             for (let y = lowestY; y <= highestY; y++) {
-                const existingCoordinate = coordinatesCount.find(coordinate => coordinate.x === fromX && coordinate.y === y)
+                const existingCoordinate = coordinatesCount.has(`${fromX},${y}`)
                 if(existingCoordinate) {
-                    existingCoordinate.count = existingCoordinate.count +1 
+                    coordinatesCount.set(`${fromX},${y}`, coordinatesCount.get(`${fromX},${y}`)! + 1)
                 } else {
-                    coordinatesCount.push({
-                        x: fromX,
-                        y,
-                        count: 1 
-                    })  
+                    coordinatesCount.set(`${fromX},${y}`, 1)  
                 }
             }
         }
     }
-    return coordinatesCount.filter(coordinate => coordinate.count > 1)
+    return coordinatesCount
+
 }
 
 export function getOverlappingCoordinatesCount(coordinates:Coordinate[]): number {
-    return getOverlappingCoordinates(coordinates).length
+    let count = 0;
+    getOverlappingCoordinates(coordinates).forEach(value => {
+        if(value > 1) {
+            count = count + 1
+        }
+    })
+    return count
 }
