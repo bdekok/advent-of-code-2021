@@ -3,10 +3,11 @@ import { getDayTwoResults } from './day2/day2.ts'
 import { getDayThreeResults } from "./day3/day3.ts";
 import { getDayFourResults } from "./day4/day4.ts";
 import { getDayFiveResults } from "./day5/day5.ts";
+import { getDaySixResults } from "./day6/day6.ts";
 
 
 export interface Result {
-    exerciseOne: number | object,
+    exerciseOne: number,
     exerciseTwo?: number
 }
 function printResults(result: Result) {
@@ -26,6 +27,8 @@ async function getDayResults() {
             return printResults(await getDayFourResults())
         case "5":
             return printResults(await getDayFiveResults())
+        case "6":
+            return printResults(await getDaySixResults())
         default:
             return console.log("We don't know the question, but 42 is the answer")
     }

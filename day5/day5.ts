@@ -4,7 +4,6 @@ import { Coordinate, getOverlappingCoordinatesCount } from "./getOverlappingCoor
 
 const dayFiveCoordinates = resolve("day5","input", "coordinates.txt");
 
-
 async function getCoordinatesFromFile(): Promise<Coordinate[]> {
     const fileText = await Deno.readTextFile(dayFiveCoordinates);
     const rows =  fileText.split(/\n/).map(row => row.split('->'))
@@ -22,9 +21,6 @@ async function getCoordinatesFromFile(): Promise<Coordinate[]> {
     }
     return coordinates
 }
-
-
-
 
 export async function getDayFiveResults(): Promise<Result> {
     const coordinates = await getCoordinatesFromFile()

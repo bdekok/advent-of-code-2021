@@ -22,7 +22,6 @@ async function getDrawnNumbersFromFile(): Promise<number[]> {
     return fileText.split(',').map(stringNumber => parseInt(stringNumber))
 }
 
-
 export async function getDayFourResults(): Promise<Result> {
     const bingoChartValues = await getBingoChartsFromFile()
     const drawnNumbers = await getDrawnNumbersFromFile()
