@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.117.0/testing/asserts.ts";
-import { getCarbonDioxideRate, getEpsilonRate, getGammaRate, getOxygenRate } from "./getBinaryDiagnostics.ts";
+import { getCarbonDioxideRate, getOxygenRate, getPowerDiagnostics } from "./getBinaryDiagnostics.ts";
 
 const testData = [
     "00100",
@@ -17,10 +17,10 @@ const testData = [
 ]
 
 Deno.test("We can get diagnostic gamma rate by looking at the most common of the first bits", () => {
-    assertEquals(getGammaRate(testData), 22);
+    assertEquals(getPowerDiagnostics(testData).gammaRate, 22);
 })
 Deno.test("We can get diagnostic epsilon rate by looking at the least common of the first bits", () => {
-    assertEquals(getEpsilonRate(testData), 9);
+    assertEquals(getPowerDiagnostics(testData).epsilonRate, 9);
 })
 Deno.test("We can get the oxygen by filtering out the values that don't have the most frequent bit of an index", () => {
     assertEquals(getOxygenRate(testData), 23);
