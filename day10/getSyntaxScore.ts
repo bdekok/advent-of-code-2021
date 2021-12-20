@@ -83,8 +83,7 @@ interface LineSyntaxError {
 function getLineSyntaxError(line: string): LineSyntaxError {   
     let openSigns: OpenSign[] = []
     const signs = line.split('') as Array<OpenSign | CloseSign>
-    let continueLoop = true
-
+    
     for (const sign of signs) {
         switch(sign) {
             case '(':
@@ -100,20 +99,17 @@ function getLineSyntaxError(line: string): LineSyntaxError {
                 const openSign = mapCloseSignToOpenSign(sign)
                 const isLastOpenSign = openSigns[openSigns.length - 1] === openSign
                 
-                if(isLastOpenSign) {
+                if(!isLastOpenSign) {
                     openSigns = openSigns.slice(0, -1)
                 } else {
-                    continueLoop = false
+                    return {
+                        breakingSign: sign as CloseSign,
+                        unclosedSigns: openSigns
+                    }
                 }
                 break;
             }
-        }
-        if(!continueLoop) {
-            return {
-                breakingSign: sign as CloseSign,
-                unclosedSigns: openSigns
-            }
-        }         
+        }       
     }
     return {
         unclosedSigns: openSigns

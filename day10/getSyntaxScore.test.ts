@@ -17,7 +17,7 @@ const testData = [
 Deno.test("Gives the correct score for breaking signs", () => {
     assertEquals(getSyntaxScoreBreakingSigns(testData), 26397)
 })
-Deno.test("Gives the correct score for breaking signs", () => {
+Deno.test("Gives the correct score for unclosed lines", () => {
     assertEquals(getSyntaxScoreUnclosedLines(testData), 288957)
 })
   
