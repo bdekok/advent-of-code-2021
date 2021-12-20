@@ -1,4 +1,5 @@
 import { getDayOneResults } from './day1/day1.ts'
+import { getDayTenResults } from "./day10/day10.ts";
 import { getDayTwoResults } from './day2/day2.ts'
 import { getDayThreeResults } from "./day3/day3.ts";
 import { getDayFourResults } from "./day4/day4.ts";
@@ -35,6 +36,8 @@ async function getDayResults() {
             return printResults(await getDaySevenResults())
         case "9":
             return printResults(await getDayNineResults())
+        case "10":
+            return printResults(await getDayTenResults())
         default:
             return console.log("We don't know the question, but 42 is the answer")
     }
