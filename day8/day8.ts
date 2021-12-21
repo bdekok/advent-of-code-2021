@@ -1,6 +1,6 @@
 import { resolve } from "https://deno.land/std@0.117.0/path/mod.ts";
 import { Result } from "../main.ts";
-import { getSimpleOutputDigitsCount } from "./getSegmentDisplay.ts";
+import { getOutput, getSimpleOutputDigitsCount } from "./getSegmentDisplay.ts";
 
 const file = resolve("day8","input", "faultySegmentDisplay.txt");
 
@@ -12,7 +12,8 @@ async function getFile(): Promise<string[]> {
 export async function getDayEightResults(): Promise<Result> {
     const syntaxLines = await getFile()
     const exerciseOne = getSimpleOutputDigitsCount(syntaxLines)
+    const exerciseTwo = getOutput(syntaxLines)
 
-    return { exerciseOne }
+    return { exerciseOne, exerciseTwo }
 }
 
