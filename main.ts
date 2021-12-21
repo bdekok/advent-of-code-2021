@@ -6,8 +6,8 @@ import { getDayFourResults } from "./day4/day4.ts";
 import { getDayFiveResults } from "./day5/day5.ts";
 import { getDaySixResults } from "./day6/day6.ts";
 import { getDaySevenResults } from "./day7/day7.ts";
+import { getDayEightResults } from "./day8/day8.ts";
 import { getDayNineResults } from "./day9/day9.ts";
-
 
 export interface Result {
     exerciseOne: number,
@@ -34,6 +34,8 @@ async function getDayResults() {
             return printResults(await getDaySixResults())
         case "7":
             return printResults(await getDaySevenResults())
+        case "8":
+            return printResults(await getDayEightResults())
         case "9":
             return printResults(await getDayNineResults())
         case "10":
