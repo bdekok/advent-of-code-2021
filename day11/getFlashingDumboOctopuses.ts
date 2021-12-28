@@ -7,7 +7,7 @@ export function getDayCountFlashingOctopuses(
   if (days === returnAfterXDays) {
     return flashCount;
   }
-
+  
   const result = getFlashingDumboOctopuses(grid);
   const newFlashes = result.flat().reduce(
     (acc, cur) => cur === 0 ? acc + 1 : acc,
@@ -21,6 +21,23 @@ export function getDayCountFlashingOctopuses(
     returnAfterXDays,
     days,
     flashCount,
+  );
+}
+
+export function getDayWhenAllOctopusesFlash(
+  grid: number[][],
+  days = 0,
+): number {
+  const everyOcotopusFlashes = grid.flat().every((octopus: number) => octopus === 0)
+  if (everyOcotopusFlashes) {
+    return days;
+  }
+  const result = getFlashingDumboOctopuses(grid);
+  days = days + 1;
+
+  return getDayWhenAllOctopusesFlash(
+    result,
+    days,
   );
 }
 
@@ -75,10 +92,13 @@ function flash(grid: number[][], x: number, y: number) {
 }
 
 export function getFlashingDumboOctopuses(grid: number[][]) {
-  for (let y = 0; y < grid.length; y++) {
-    for (let x = 0; x < grid[y].length; x++) {
-      flash(grid, x, y);
+  // recursive clone of the array as we will mutating it 
+  // but don't want to mutate the original input
+  const newGrid = JSON.parse(JSON.stringify(grid)) as number[][]
+  for (let y = 0; y < newGrid.length; y++) {
+    for (let x = 0; x < newGrid[y].length; x++) {
+      flash(newGrid, x, y);
     }
   }
-  return grid.map((row) => row.map((number) => number === -1 ? 0 : number));
+  return newGrid.map((row) => row.map((number) => number === -1 ? 0 : number));
 }

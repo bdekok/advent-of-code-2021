@@ -1,6 +1,6 @@
 import { resolve } from "https://deno.land/std@0.117.0/path/mod.ts";
 import { Result } from "../main.ts";
-import { getDayCountFlashingOctopuses } from "./getFlashingDumboOctopuses.ts";
+import { getDayCountFlashingOctopuses, getDayWhenAllOctopusesFlash } from "./getFlashingDumboOctopuses.ts";
 
 const file = resolve("day11", "input", "dumbos.txt");
 
@@ -14,6 +14,6 @@ async function getFile(): Promise<number[][]> {
 export async function getDayElevenResults(): Promise<Result> {
   const dumboOctopuses = await getFile();
   const exerciseOne = getDayCountFlashingOctopuses(dumboOctopuses, 100);
-
-  return { exerciseOne };
+  const exerciseTwo = getDayWhenAllOctopusesFlash(dumboOctopuses)
+  return { exerciseOne, exerciseTwo };
 }
