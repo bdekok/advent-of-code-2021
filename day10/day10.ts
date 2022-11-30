@@ -1,4 +1,4 @@
-import { resolve } from "https://deno.land/std@0.117.0/path/mod.ts";
+import { resolve } from "../depts.ts"
 import { Result } from "../main.ts";
 import { getSyntaxScoreBreakingSigns, getSyntaxScoreUnclosedLines } from "./getSyntaxScore.ts";
 

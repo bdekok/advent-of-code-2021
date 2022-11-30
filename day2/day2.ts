@@ -1,6 +1,6 @@
 import { getSubmarineLocation, getSubmarineLocationWithAim, mapMovementStringsToMovements, Movement } from "./getSubmarineLocation.ts";
-import { resolve } from "https://deno.land/std@0.117.0/path/mod.ts";
 import { Result } from "../main.ts";
+import { resolve } from "../depts.ts";
 
 const dayTwoFilePath = resolve("day2","input", "movements.txt");
 
